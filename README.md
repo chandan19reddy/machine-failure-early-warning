@@ -47,25 +47,6 @@ Confusion matrix order is `[[true negatives, false positives], [false negatives,
 
 Feature importance is a model explanation aid, not causation: Random Forest impurity importance is biased toward some feature structures; Logistic Regression magnitude is absolute standardized coefficient magnitude.
 
-## Interview talking points
-
-1. **Why stratify?** It preserves the rare failure proportion in train and test for a more representative evaluation.
-2. **How is imbalance handled without leakage?** Class weights make mistakes on minority failures matter more; imputation/scaling are pipeline steps fit only during training.
-3. **Why prioritize recall?** A false negative is an actual failure the warning system misses; in many maintenance contexts that is more costly than an inspection triggered by a false alarm. The costs must be confirmed with operators.
-4. **Why compare precision too?** Excessive false alarms erode trust and drive unnecessary maintenance.
-5. **What does the confusion matrix show?** Counts of correct no-failure/failure and the two error types; FN is the missed-failure cell.
-6. **What are limitations?** AI4I is synthetic, the split is random, only five features are used, 0.5 is not optimized, and estimates are not calibrated or safety validated.
-7. **Why these models?** Logistic Regression is an interpretable baseline; Random Forest captures nonlinear interactions with little feature scaling.
-
-## Limitations
-
-- AI4I is synthetic benchmark data and cannot establish performance on real machines.
-- Evaluation uses one random stratified hold-out split, not external validation or time-based validation.
-- The dashboard uses a fixed 0.5 probability threshold; the output is not calibrated, and there is no cost-based threshold selection.
-- The model uses only five sensor measurements and does not account for machine identity, operating context, or changing conditions.
-- Feature importance/coefficient magnitude is descriptive and does not establish causality.
-- The model has not been validated for industrial use, maintenance decisions, or safety-critical systems.
-
 ## Safety
 
 This is an experimental portfolio demo. Do not use its predictions for real industrial safety, maintenance, or operational decisions.
